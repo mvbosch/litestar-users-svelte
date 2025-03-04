@@ -1,0 +1,35 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "Python: Litestar",
+        "type": "debugpy",
+        "request": "launch",
+        "module": "uvicorn",
+        "args": [
+          "--host",
+          "0.0.0.0",
+          "--port",
+          "5000",
+          "--reload",
+          "src.main:app"
+        ],
+        "autoReload": {
+          "enable": true
+        },
+        "justMyCode": false
+      },
+      {
+        "name": "Debug unit test",
+        "type": "debugpy",
+        "request": "launch",
+        "justMyCode": false,
+        "program": "${file}",
+        "purpose": ["debug-test"],
+        "console": "integratedTerminal",
+        "env": {
+          "PYTEST_ADDOPTS": "--no-cov"
+        }
+      }
+    ]
+  }

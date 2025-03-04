@@ -1,0 +1,60 @@
+x-logging: &default-logging
+  options:
+    max-size: "5m"
+    max-file: "3"
+
+services:
+  db:
+    container_name: litestar-users-db
+    image: postgres:15-bookworm
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+    env_file:
+      - backend/.env_local
+    ports:
+      - "6400:5432"
+    logging: *default-logging
+
+  litestar:
+    container_name: litestar-users
+    build:
+      context: ./backend
+      dockerfile: ../.devcontainer/backend.Dockerfile
+    volumes:
+      - .:/app:cached
+      - xdg_home_bin:/home/developer/.local/bin
+      - uv_tools:/home/developer/.local/share/uv
+      - /app/backend/.venv
+      - pre_commit_cache:/home/developer/.cache/pre-commit
+    env_file:
+      - backend/.env_local
+    ports:
+      - "5400:5000"
+    depends_on:
+      - db
+    logging: *default-logging
+    command: /bin/sh -c "while sleep 1000; do :; done"
+
+  sveltekit:
+    container_name: litestar-users-sveltekit
+    build:
+      context: ./frontend
+      dockerfile: ../.devcontainer/frontend.Dockerfile
+    volumes:
+      - .:/app:cached
+      - node_modules:/app/frontend/node_modules
+    environment:
+      VITE_API_URL: http://localhost:5400/api
+    ports:
+      - "3400:3000"
+    depends_on:
+      - litestar
+    logging: *default-logging
+    command: /bin/sh -c "while sleep 1000; do :; done"
+
+volumes:
+  node_modules:
+  dbdata:
+  xdg_home_bin:
+  pre_commit_cache:
+  uv_tools:
