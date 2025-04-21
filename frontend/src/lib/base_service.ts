@@ -1,6 +1,6 @@
 import type { ZodTypeAny } from 'zod';
 
-import { client } from './http';
+import { client } from './http_client';
 
 declare type ParamType = string | number | boolean | null;
 
