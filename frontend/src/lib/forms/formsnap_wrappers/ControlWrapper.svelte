@@ -1,16 +1,26 @@
 <script lang="ts">
-	import { Control, Label, type ControlProps } from "formsnap";
+	import { Control, Label } from "formsnap";
+	import type { ComponentProps } from "svelte";
  
-	type $$Props = ControlProps & {
+	let {
+		label,
+		// Rename the children prop to childrenProp to avoid
+		// conflicts with the Control component
+		children: childrenProp,
+		...restProps
+	}: ComponentProps<typeof Control> & {
 		label: string;
-	};
- 
-	export let label: string;
+	} = $props();
 </script>
  
-<Control let:attrs {...$$restProps}>
-	<div class="flex flex-col gap-2">
-		<Label>{label}</Label>
-		<slot {attrs} />
-	</div>
+<Control {...restProps}>
+	{#snippet children({ props })}
+		<div>
+			<Label>{label}</Label>
+			<!-- Forward the props to the children snippet -->
+			 {#if childrenProp}
+				{@render childrenProp({ props })}
+			{/if}
+		</div>
+	{/snippet}
 </Control>
