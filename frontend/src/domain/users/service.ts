@@ -31,4 +31,11 @@ export class UserService extends BaseService<UserWriteType, UserReadType, UserWr
 		const response = await this.client.get<UserReadType[]>(url);
 		return response.data.map((user: unknown) => this.readSchema.parse(user));
 	}
+
+	async register(data: AuthenticationSchemaType): Promise<UserReadType> {
+		this.ensureArgs({ data });
+		const url = this.buildUrl('/register');
+		const response = await this.client.post<UserReadType>(url, { json: data });
+		return this.readSchema.parse(response.data);
+	}
 }

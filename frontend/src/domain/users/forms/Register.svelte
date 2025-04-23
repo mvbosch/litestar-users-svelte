@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { superForm, defaults, type SuperValidated } from 'sveltekit-superforms';
 	import { zod } from 'sveltekit-superforms/adapters';
-	import { goto } from '$app/navigation';
 
 	import { UserService } from '$domain/users/service';
 	import { authenticationSchema, type AuthenticationSchemaType } from '$domain/users/schemas';
@@ -20,20 +19,17 @@
   const { form: formData, enhance } = form;
 
 	async function makeRequest(form: SuperValidated<AuthenticationSchemaType>) {
-		// strictly client validation
 		if (form.valid) {
 			try {
-				const user = await userService.authenticate(form.data);
-				goto('/admin');
+				const user = await userService.register(form.data);
 			} catch (error: unknown) {
 				try {
-					handleSubmissionErrors(error, form, { });
+					handleSubmissionErrors(error, form, { 409: ['email', 'The user already exists'] });
 				} catch (error: unknown) {
 					console.error(`Error: ${error}`);
 			}
 		}
 	}}
-
 </script>
 
 <form use:enhance>
