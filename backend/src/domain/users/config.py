@@ -25,10 +25,12 @@ litestar_users_config = LitestarUsersConfig(
     user_registration_dto=UserRegistrationDTO,
     user_update_dto=UserUpdateDTO,
     user_service_class=UserService,  # pyright: ignore
-    auth_handler_config=AuthHandlerConfig(),
-    current_user_handler_config=CurrentUserHandlerConfig(),
-    password_reset_handler_config=PasswordResetHandlerConfig(),
-    register_handler_config=RegisterHandlerConfig(),
-    user_management_handler_config=UserManagementHandlerConfig(),
-    verification_handler_config=VerificationHandlerConfig(),
+    auth_handler_config=AuthHandlerConfig(login_path="/api/login", logout_path="/api/logout"),
+    current_user_handler_config=CurrentUserHandlerConfig(path="/api/users/me"),
+    password_reset_handler_config=PasswordResetHandlerConfig(
+        forgot_path="/api/forgot-password", reset_path="/api/reset-password"
+    ),
+    register_handler_config=RegisterHandlerConfig(path="/api/register"),
+    user_management_handler_config=UserManagementHandlerConfig(path_prefix="/api/users"),
+    verification_handler_config=VerificationHandlerConfig(path="/api/verify"),
 )
