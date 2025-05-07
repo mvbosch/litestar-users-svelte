@@ -15,7 +15,7 @@
  
 <Control {...restProps}>
 	{#snippet children({ props })}
-		<div>
+		<div style="display: flex; flex-direction: column; gap: 0.5rem; text-align: left;">
 			<Label>{label}</Label>
 			<!-- Forward the props to the children snippet -->
 			 {#if childrenProp}

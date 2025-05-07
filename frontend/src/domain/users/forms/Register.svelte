@@ -32,9 +32,10 @@
 	}}
 </script>
 
+<div class="form-container">
 <form use:enhance>
   <FieldWrapper {form} name="email" >
-    <ControlWrapper label="Email">
+    <ControlWrapper label="Email" style="width: 100%">
       <input  type="email" bind:value={$formData.email} />
     </ControlWrapper>
   </FieldWrapper>
@@ -43,29 +44,13 @@
       <input  type="password" bind:value={$formData.password} />
     </ControlWrapper>
   </FieldWrapper>
-  <button type="submit">Login</button>
+  <button type="submit">Register</button>
 </form>
+</div>
 
 <style>
   form {
-    display: flex;
-    flex-direction: column;
-  }
-  input {
-    margin-bottom: 10px;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  button {
-    padding: 10px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  button:hover {
-    background-color: #0056b3;
+      display: flex;
+      flex-direction: column;
   }
 </style>

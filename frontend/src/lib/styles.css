@@ -1,0 +1,81 @@
+html {
+    color-scheme: light dark;
+}
+
+.form-container {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: var(--background-color, #fff);
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+input {
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid var(--border-color, #ccc);
+    border-radius: 4px;
+    font-size: 1rem;
+    background-color: var(--input-background-color, #fff);
+    color: var(--text-color, #000);
+}
+
+input:focus {
+    outline: none;
+    border-color: var(--focus-border-color, #6a0dad); /* Royal purple */
+    box-shadow: 0 0 4px rgba(106, 13, 173, 0.5); /* Royal purple */
+}
+
+button {
+    padding: 12px;
+    background-color: var(--button-background-color, #6a0dad); /* Royal purple */
+    color: var(--button-text-color, white);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: var(--button-hover-background-color, #5a0c9e); /* Darker royal purple */
+}
+
+button:active {
+    background-color: var(--button-active-background-color, #4a0a8e); /* Even darker royal purple */
+}
+
+/* Dark mode adjustments */
+@media (prefers-color-scheme: dark) {
+    .form-container {
+        background-color: var(--background-color-dark, #333);
+        box-shadow: 0 4px 6px rgba(255, 255, 255, 0.1);
+    }
+
+    input {
+        background-color: var(--input-background-color-dark, #444);
+        color: var(--text-color-dark, #fff);
+        border: 1px solid var(--border-color-dark, #555);
+    }
+
+    input:focus {
+        border-color: var(--focus-border-color-dark, #6a0dad); /* Royal purple */
+        box-shadow: 0 0 4px rgba(106, 13, 173, 0.5); /* Royal purple */
+    }
+
+    button {
+        background-color: var(--button-background-color-dark, #6a0dad); /* Royal purple */
+        color: var(--button-text-color-dark, white);
+    }
+
+    button:hover {
+        background-color: var(--button-hover-background-color-dark, #5a0c9e); /* Darker royal purple */
+    }
+
+    button:active {
+        background-color: var(--button-active-background-color-dark, #4a0a8e); /* Even darker royal purple */
+    }
+}
