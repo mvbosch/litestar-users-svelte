@@ -24,6 +24,8 @@ class ApplicationSettings(BaseSettings):
     """The logging level for the application."""
     SECRET_KEY: str
     """The secret key for the application."""
+    FRONTEND_BASE_URL: str
+    """The base URL for the frontend application."""
 
 
 @dataclass(init=False)
